@@ -3,20 +3,24 @@
   apt:
     name: nginx
     state: present
+
 - name: Copy nginx cfg
   template:
-    src: "{{ nginx_template_file }}"
+    src: templates/nginx.conf.j2
     dest: "{{ nginx_available_dir }}"
+
 - name: Validate nginx cfg
   command: nginx -t
   register: nginx_validation
   failed_when: nginx_validation.rc != 0
   changed_when: false
+
 - name: Enable nginx
-  template:
+  file:
     src: "{{ nginx_available_dir }}"
     dest: "{{ nginx_enabled_dir }}"
     state: link
+
 - name: Check nginx state
   service:
     name: nginx
