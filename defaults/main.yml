@@ -2,3 +2,5 @@
 nginx_available_dir: "/etc/nginx/sites-available/default"
 
 nginx_enable_dir: "/etc/nginx/sites-enabled/default"
+
+nginx_proxy_port: 8000
